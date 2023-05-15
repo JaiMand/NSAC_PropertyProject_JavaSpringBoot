@@ -1,7 +1,5 @@
 package com.qa.propertyapp.service;
 
-//import com.qa.propertyapp.model.Buyers;
-//import com.qa.propertyapp.model.Sellers;
 import com.qa.propertyapp.model.Buyers;
 import com.qa.propertyapp.model.Properties;
 import com.qa.propertyapp.model.Sellers;
@@ -26,7 +24,8 @@ public class PropertyService {
     private BuyerRepo buyerRepo;
 
 
-    public PropertyService(PropertyRepo propertyRepo, SellerRepo sellerRepo, BuyerRepo buyerRepo){
+    public PropertyService(PropertyRepo propertyRepo, SellerRepo sellerRepo,
+                           BuyerRepo buyerRepo){
         this.propertyRepo = propertyRepo;
         this.sellerRepo = sellerRepo;
         this.buyerRepo = buyerRepo;

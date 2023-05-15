@@ -1,14 +1,9 @@
 package com.qa.propertyapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 @Table(name = "booking")
 @Entity
@@ -19,6 +14,29 @@ public class Bookings {
 
     private LocalDate date;
     private LocalTime time;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private Properties property;
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Sellers seller;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyers buyer;
+
+    public Bookings() {}
+
+    public Bookings(long id, LocalDate date, LocalTime time, Properties property,
+                    Buyers buyer, Sellers seller) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.property = property;
+        this.seller = seller;
+        this.buyer = buyer;
+
+    }
 
     public long getId() {
         return id;
@@ -44,21 +62,29 @@ public class Bookings {
         this.time = time;
     }
 
-    public List<Properties> getProperties() {
-        return properties;
+    public Properties getProperty() {
+        return property;
     }
 
-    public void setProperties(List<Properties> properties) {
-        this.properties = properties;
+    public void setProperty(Properties property) {
+        this.property = property;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "booking_property",
-            joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name = "property_id")
-    )
-    private List<Properties> properties;
+    public Sellers getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Sellers seller) {
+        this.seller = seller;
+    }
+
+    public Buyers getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyers buyer) {
+        this.buyer = buyer;
+    }
 
     @Override
     public String toString() {
@@ -66,7 +92,9 @@ public class Bookings {
                 "id=" + id +
                 ", date=" + date +
                 ", time=" + time +
-                ", properties=" + properties +
+                ", property=" + property +
+                ", seller=" + seller +
+                ", buyer=" + buyer +
                 '}';
     }
 }

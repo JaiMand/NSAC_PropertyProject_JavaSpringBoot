@@ -1,8 +1,8 @@
 package com.qa.propertyapp.controller;
 
-import com.qa.propertyapp.model.Sellers;
-import com.qa.propertyapp.repo.SellerRepo;
-import com.qa.propertyapp.service.SellerService;
+import com.qa.propertyapp.model.Bookings;
+import com.qa.propertyapp.repo.BookingRepo;
+import com.qa.propertyapp.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,43 +10,43 @@ import java.util.List;
 
 @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
 @RestController
-@RequestMapping("/seller")
+@RequestMapping("/booking")
 public class BookingController {
 
         @Autowired
-        SellerRepo mRepo;
+        BookingRepo mRepo;
 
         @Autowired
-        SellerService service;
+        BookingService service;
 
         @GetMapping("/read")
-        public List<Sellers> read() {
+        public List<Bookings> read() {
             return service.getAll();
         }
 
         @GetMapping("/read/{Id}")
-        public Sellers readOne(@PathVariable long Id ) {
-            return service.getSeller(Id);
+        public Bookings readOne(@PathVariable long Id ) {
+            return service.getBooking(Id);
         }
 
         @PostMapping("/add")
-        public Sellers add(@RequestBody Sellers seller){
-            return service.createSeller(seller);
+        public Bookings add(@RequestBody Bookings booking){
+            return service.createBooking(booking);
         }
 
         @DeleteMapping("/delete/{Id}")
         public void delete(@PathVariable long Id ) {
-            service.deleteSeller(Id);
+            service.deleteBooking(Id);
         }
 
         @PutMapping("/update/{Id}")
-        public void update(@RequestBody Sellers newSeller, @PathVariable ("Id") long Id) {
-            service.updateSeller(newSeller, Id);
+        public void update(@RequestBody Bookings newBooking, @PathVariable ("Id") long Id) {
+            service.updateBooking(newBooking, Id);
         }
 
 //        @PatchMapping("/update/{Id}")
-//        public void update(@RequestBody Sellers newSeller, @PathVariable ("Id") long Id) {
-//            service.updateSeller(newSeller, Id);
+//        public void update(@RequestBody Bookings newBooking, @PathVariable ("Id") long Id) {
+//            service.updateBooking(newBooking, Id);
 //        }
 
     }
