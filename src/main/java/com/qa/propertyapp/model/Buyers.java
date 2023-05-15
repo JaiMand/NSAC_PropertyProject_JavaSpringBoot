@@ -2,9 +2,12 @@ package com.qa.propertyapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+@Table (name= "buyer")
 @Entity
 public class Buyers {
 
@@ -12,20 +15,35 @@ public class Buyers {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private long Id;
+    private long id;
     private String first_name;
     private String surname;
+    @Email
     private String email;
     private String address;
     private String postcode;
-    private int phone_number;
+    @Size(max = 11, min = 11, message = "Phone number must be 11 characters long")
+    private String phone_number;
 
+
+    public Buyers() {
+    }
+    public Buyers(long id, String first_name, String surname, String email,
+                  String address, String postcode, String phone_number) {
+        this.id = id;
+        this.first_name = first_name;
+        this.surname = surname;
+        this.email = email;
+        this.address = address;
+        this.postcode = postcode;
+        this.phone_number = phone_number;
+    }
 
     public long getId() {
-        return Id;
+        return id;
     }
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getFirst_name() {
@@ -63,36 +81,37 @@ public class Buyers {
         this.postcode = postcode;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
-    public List<Sellers> getSellers() {
-        return sellers;
-    }
-    public void setSellers(List<Sellers> sellers) {
-        this.sellers = sellers;
-    }
 
+    @ManyToOne
+    private Properties property;
 
-    @OneToMany(mappedBy = "buyers", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "buyers", fetch = FetchType.EAGER, cascade = {
+            CascadeType.REMOVE
+    })
     @JsonIgnore
-    private List<Sellers> sellers;
+    private List<Properties> propertiesList;
+
+//    @OneToMany(mappedBy = "buyers", fetch = FetchType.EAGER)
+//    @JsonIgnore
+//    private List<Properties> properties;
 
     @Override
     public String toString() {
         return "Buyers{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", postcode='" + postcode + '\'' +
                 ", phone_number=" + phone_number +
-                ", sellers=" + sellers +
                 '}';
     }
 }

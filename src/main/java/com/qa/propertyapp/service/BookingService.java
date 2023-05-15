@@ -1,25 +1,23 @@
 package com.qa.propertyapp.service;
 
-import com.qa.propertyapp.model.Buyers;
 import com.qa.propertyapp.model.Sellers;
 import com.qa.propertyapp.repo.SellerRepo;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SellerService {
+public class BookingService {
     @Autowired
     private SellerRepo repo;
 
-    public SellerService(SellerRepo repo){
+    public BookingService(SellerRepo repo){
         this.repo = repo;
     }
-    public SellerService(){
+    public BookingService(){
 
     }
 

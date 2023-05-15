@@ -2,26 +2,33 @@ package com.qa.propertyapp.model;
 
 import jakarta.persistence.*;
 
+@Table (name= "properties")
 @Entity
 public class Properties {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private String address;
     private String postcode;
-    private String price;
+    private double price;
     private String status;
+//    private enum status{
+//        FOR_SALE,
+//        WITHDRAW,
+//        SOLD
+//    };
     private String type;
-    private String bedrooms;
-    private String bathrooms;
-    private String garden;
-    private String seller_id_fk;
+    private int bedrooms;
+    private int bathrooms;
+    private boolean garden;
 
     public Properties() {
     }
 
-    public Properties(long Id, String address, String postcode, String price, String status, String type, String bedrooms, String bathrooms, String garden, String seller_id_fk, Sellers sellers) {
-        this.Id = Id;
+    public Properties(long id, String address, String postcode, double price, String status,
+                      String type, int bedrooms, int bathrooms, boolean garden, Sellers sellers,
+                      Buyers buyers) {
+        this.id = id;
         this.address = address;
         this.postcode = postcode;
         this.type = type;
@@ -30,15 +37,15 @@ public class Properties {
         this.bathrooms = bathrooms;
         this.garden = garden;
         this.status = status;
-        this.seller_id_fk = seller_id_fk;
         this.sellers = sellers;
+        this.buyers = buyers;
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
     public void setId(long Id) {
-        this.Id = Id;
+        this.id = id;
     }
 
     public String getAddress() {
@@ -62,31 +69,31 @@ public class Properties {
         this.type = type;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getBedrooms() {
+    public int getBedrooms() {
         return bedrooms;
     }
-    public void setBedrooms(String bedrooms) {
+    public void setBedrooms(int bedrooms) {
         this.bedrooms = bedrooms;
     }
 
-    public String getBathrooms() {
+    public int getBathrooms() {
         return bathrooms;
     }
-    public void setBathrooms(String bathrooms) {
+    public void setBathrooms(int bathrooms) {
         this.bathrooms = bathrooms;
     }
 
-    public String getGarden() {
+    public boolean getGarden() {
         return garden;
     }
-    public void setGarden(String garden) {
+    public void setGarden(boolean garden) {
         this.garden = garden;
     }
 
@@ -97,13 +104,6 @@ public class Properties {
         this.status = status;
     }
 
-    public String getSeller_id_fk() {
-        return seller_id_fk;
-    }
-    public void setSeller_id_fk(String seller_id_fk) {
-        this.seller_id_fk = seller_id_fk;
-    }
-
     public Sellers getSellers() {
         return sellers;
     }
@@ -111,21 +111,22 @@ public class Properties {
         this.sellers = sellers;
     }
 
+    public Buyers getBuyers() {
+        return buyers;
+    }
+    public void setBuyers(Buyers buyers) {
+        this.buyers = buyers;
+    }
 
-    @ManyToOne
+    @ManyToOne//(cascade = CascadeType.ALL)
+    private Buyers buyers;
+    @ManyToOne//(cascade = CascadeType.ALL)
     private Sellers sellers;
-
-    public Sellers get() {
-        return sellers;
-    }
-    public void setEmployee(Sellers sellers) {
-        this.sellers = sellers;
-    }
 
     @Override
     public String toString() {
         return "Properties{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", address='" + address + '\'' +
                 ", postcode='" + postcode + '\'' +
                 ", price='" + price + '\'' +

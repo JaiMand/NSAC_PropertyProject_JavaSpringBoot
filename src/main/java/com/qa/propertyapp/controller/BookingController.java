@@ -1,6 +1,5 @@
 package com.qa.propertyapp.controller;
 
-import com.qa.propertyapp.model.Properties;
 import com.qa.propertyapp.model.Sellers;
 import com.qa.propertyapp.repo.SellerRepo;
 import com.qa.propertyapp.service.SellerService;
@@ -12,7 +11,7 @@ import java.util.List;
 @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
 @RestController
 @RequestMapping("/seller")
-public class SellerController {
+public class BookingController {
 
         @Autowired
         SellerRepo mRepo;
