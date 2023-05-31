@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
 @RestController
 @RequestMapping("/seller")
@@ -21,16 +22,19 @@ public class SellerController {
         SellerService service;
 
         @GetMapping("/read")
+        @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
         public List<Sellers> read() {
             return service.getAll();
         }
 
         @GetMapping("/read/{Id}")
+        @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
         public Sellers readOne(@PathVariable long Id ) {
             return service.getSeller(Id);
         }
 
         @PostMapping("/add")
+        @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
         public Sellers add(@RequestBody Sellers seller){
             return service.createSeller(seller);
         }
@@ -41,6 +45,7 @@ public class SellerController {
         }
 
         @PutMapping("/update/{Id}")
+        @CrossOrigin("*") //usually you put the address rather than allowing everyone access http://localhost:3000/
         public void update(@RequestBody Sellers newSeller, @PathVariable ("Id") long Id) {
             service.updateSeller(newSeller, Id);
         }

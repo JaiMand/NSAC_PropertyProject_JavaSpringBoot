@@ -20,26 +20,31 @@ public class BuyerController {
     BuyerService service;
 
     @GetMapping("/read")
+    @CrossOrigin("*")
     public List<Buyers> read() {
         return service.getAll();
     }
 
     @GetMapping("/read/{id}")
+    @CrossOrigin("*")
     public Buyers readOne(@PathVariable long id ) {
         return service.getBuyer(id);
     }
 
     @PostMapping("/add")
+    @CrossOrigin("*")
     public Buyers add(@Valid @RequestBody Buyers buyer){
         return service.createBuyer(buyer);
     }
 
     @DeleteMapping("/delete/{id}")
+    @CrossOrigin("*")
     public void delete(@PathVariable long id ) {
         service.deleteBuyer(id);
     }
 
     @PutMapping("/update/{id}")
+    @CrossOrigin("*")
     public void update(@Valid @RequestBody Buyers newBuyer, @PathVariable ("id") long id) {
         service.updateBuyers(newBuyer, id);
     }

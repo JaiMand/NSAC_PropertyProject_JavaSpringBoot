@@ -20,26 +20,31 @@ public class BookingController {
         BookingService service;
 
         @GetMapping("/read")
+        @CrossOrigin("*")
         public List<Bookings> read() {
             return service.getAll();
         }
 
         @GetMapping("/read/{Id}")
+        @CrossOrigin("*")
         public Bookings readOne(@PathVariable long Id ) {
             return service.getBooking(Id);
         }
 
         @PostMapping("/add")
+        @CrossOrigin("*")
         public Bookings add(@RequestBody Bookings booking){
             return service.createBooking(booking);
         }
 
         @DeleteMapping("/delete/{Id}")
+        @CrossOrigin("*")
         public void delete(@PathVariable long Id ) {
             service.deleteBooking(Id);
         }
 
         @PutMapping("/update/{Id}")
+        @CrossOrigin("*")
         public void update(@RequestBody Bookings newBooking, @PathVariable ("Id") long Id) {
             service.updateBooking(newBooking, Id);
         }

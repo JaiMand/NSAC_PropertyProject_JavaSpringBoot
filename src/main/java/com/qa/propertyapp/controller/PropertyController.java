@@ -25,30 +25,36 @@ public class PropertyController {
     }
 
         @GetMapping("/read")
+        @CrossOrigin("*")
         public List<Properties> read() {
             return service.getAll();
         }
 
         @GetMapping("/read/{Id}")
+        @CrossOrigin("*")
         public Properties readOne(@PathVariable long id ) {
             return service.getProperties(id);
         }
 
         @PostMapping("/add")
+        @CrossOrigin("*")
         public Properties add(@RequestBody Properties property){
             return this.service.createProperties(property);
         }
 
         @DeleteMapping("/delete/{Id}")
+        @CrossOrigin("*")
         public void delete(@PathVariable long Id ) {
             service.deleteProperties(Id);
         }
 
         @PutMapping("/update/{Id}")
+        @CrossOrigin("*")
         public void update(@RequestBody Properties newProperty, @PathVariable ("Id") long Id) {
             service.updateProperties(newProperty, Id);
         }
         @PatchMapping("/change/{Id}")
+        @CrossOrigin("*")
         public void change(@RequestBody Properties newProperty, @PathVariable ("Id") long Id) {
             service.changeProperties(newProperty, Id);
         }
