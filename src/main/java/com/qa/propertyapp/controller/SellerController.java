@@ -40,6 +40,7 @@ public class SellerController {
         }
 
         @DeleteMapping("/delete/{Id}")
+        @CrossOrigin("*")
         public void delete(@PathVariable long Id ) {
             service.deleteSeller(Id);
         }
